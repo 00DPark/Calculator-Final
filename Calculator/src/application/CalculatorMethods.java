@@ -12,33 +12,26 @@ public class CalculatorMethods
 		this.currentValue = currentValue;
 	    memory = new ArrayList<Double>();
 	}
-
-	public static void addMemory(double op)
-	{
-		if(memory.size() == 10)
-		{
-			memory.remove(0);
-			memory.add(op);
-			memory.add(currentValue);
-		}
-	        
-		else
-		{
-			memory.add(op);
-		}
-	}
-
-	public static void printMemory()
+	
+	/*public static void printMemory()
 	{
 	  for(int i = 0; i < memory.size(); i++)
 	  {
 	     System.out.println(memory.get(i));        
 	  }
-	}
+	  System.out.println(memory);
+	}*/
+	
+	
 	public static void setCurrentValue(double op)
 	{
 		double num = Double.valueOf(op);
         currentValue = num;
+	}
+	
+	public static void setMemory(double op)
+	{
+		memory.add(op);
 	}
 	
 	public static double getCurrentValue()
@@ -46,6 +39,11 @@ public class CalculatorMethods
 	  return currentValue;
 	}
 
+	public static ArrayList<Double> getMemory()
+	{
+		return memory;
+	}
+	
 	public static double addition(double op2)
 	{
 		setCurrentValue(currentValue);
@@ -138,19 +136,39 @@ public class CalculatorMethods
 		return currentValue;
 	}
 	
-	public static void memClear()
+	public static ArrayList<Double> memClear()
 	{
 		for(int i=0; i<memory.size(); i++)
 		{
 			memory.remove(i);
 		}
+		return memory;
 	}
 	
-	public static void memStore(double op1)
+	public static ArrayList<Double> memStore(double op1)
 	{
+		setMemory(op1);
 		memory.add(op1);
+		return memory;
 	}
 	
+	public static ArrayList<Double> addMemory(double op)
+	{
+		setMemory(op);
+		if(memory.size() == 10)
+		{
+			memory.remove(0);
+			memory.add(op);
+			memory.add(currentValue);
+		}
+	        
+		else
+		{
+			memory.add(op);
+		}
+		return memory;
+	}
+
 	public String toString()
 	{
 		return "= " + currentValue;

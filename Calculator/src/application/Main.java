@@ -101,7 +101,7 @@ public class Main extends Application
 	   btnMPlus.setPrefSize(100, 50);
 	   
 	   //creates label used to display results and sets style
-	   lblText= new Label("Result:");
+	   lblText= new Label("");
 	   lblText.setPrefSize(200, 50);
 	   lblText.setAlignment(Pos.BOTTOM_CENTER);
 	   lblText.setStyle("-fx-border-color: #000; -fx-padding: 5px;");
@@ -135,18 +135,17 @@ public class Main extends Application
      
      root.add(btnAddition, 0, 5);
      root.add(btnSubtract, 1, 5);
-     
      root.add(btnMultiply, 0, 6);
      root.add(btnDivision, 1, 6);
      
      root.add(text, 0,7,6,5);
-     root.add(lblText,0, 15, 14, 13);
+     root.add(lblText,0, 13, 12, 11);
      
      //attaches the code for the buttons
      onClickEventActions();
      
      //creates gui window
-     Scene scene= new Scene(root, 400, 600);
+     Scene scene= new Scene(root, 500, 500);
      
      //window title
      stage.setTitle("Calculator Program");
@@ -200,11 +199,10 @@ public class Main extends Application
 		if(e.getSource()== btnClear)
 		{
 			//clears both boxes and sets the starting position back to textbox
+			m.setCurrentValue(0);
 			text.setText("");
 			lblText.setText("");
 			text.requestFocus();
-			return;
-			
 		}
 		
 		//addition function
@@ -212,9 +210,10 @@ public class Main extends Application
 		{	
 			//calls addition method and then clears 
 			m.addition(op1);
-			lblText.setText(m.getCurrentValue()+ "+ " + op1);
+			//lblText.setText(m.getCurrentValue()+ "+ " + op1);
 			text.setText("");
 			text.requestFocus();
+			lblText.setText(m.toString());
 		}
 		
 		//subtraction function
@@ -222,9 +221,10 @@ public class Main extends Application
 		{
 			//calls subtraction method and then clears 
 			m.subtraction(op1);
-			lblText.setText(m.getCurrentValue()+ "- " + op1);
+			//lblText.setText(m.getCurrentValue()+ "- " + op1);
 			text.setText("");
 			text.requestFocus();
+			lblText.setText(m.toString());
 		}
 		
 		//multiplication function
@@ -232,10 +232,10 @@ public class Main extends Application
 		{
 			//calls multiplication method and then clears 
 			m.multiplication(op1);
-			lblText.setText(m.getCurrentValue()+ "* " + op1);
+			//lblText.setText(m.getCurrentValue()+ "* " + op1);
 			text.setText("");
 			text.requestFocus();
-		
+			lblText.setText(m.toString());
 		}
 		
 		//division function
@@ -243,9 +243,10 @@ public class Main extends Application
 		{
 			//calls division method and then clears 
 			m.division(op1);
-			lblText.setText(m.getCurrentValue()+ "/ " + op1);
+			//lblText.setText(m.getCurrentValue()+ "/ " + op1);
 			text.setText("");
 			text.requestFocus();
+			lblText.setText(m.toString());
 		}
 		
 		//exponent function
@@ -253,9 +254,10 @@ public class Main extends Application
 		{
 			//calls exponent method and then clears 
 			m.exponential(op1);
-			lblText.setText(m.getCurrentValue()+ "^ " + op1);
+			//lblText.setText(m.getCurrentValue()+ "^ " + op1);
 			text.setText("");
 			text.requestFocus();
+			lblText.setText(m.toString());
 		}
 		
 		//logarithm function
@@ -263,9 +265,10 @@ public class Main extends Application
 		{
 			//calls logarithm method and then clears
 			m.log(op1);
-			lblText.setText(m.getCurrentValue()+ "log() " + op1);
+			//lblText.setText(m.getCurrentValue()+ "log() " + op1);
 			text.setText("");
 			text.requestFocus();
+			lblText.setText(m.toString());
 		}
 		
 		//square root function
@@ -273,9 +276,10 @@ public class Main extends Application
 		{
 			//calls square root method and then clears
 			m.squareRoot(op1);
-			lblText.setText(m.getCurrentValue()+ "Sqrt() " + op1);
+			//lblText.setText(m.getCurrentValue()+ "Sqrt() " + op1);
 			text.setText("");
 			text.requestFocus();
+			lblText.setText(m.toString());
 		}
 		
 		//cosine function
@@ -283,9 +287,10 @@ public class Main extends Application
 		{
 			//calls cosine method and then clears
 			m.cos(op1);
-			lblText.setText(m.getCurrentValue()+ "cos() " + op1);
+			//lblText.setText(m.getCurrentValue()+ "cos() " + op1);
 			text.setText("");
 			text.requestFocus();
+			lblText.setText(m.toString());
 		}
 		
 		//tangent function
@@ -293,9 +298,10 @@ public class Main extends Application
 		{
 			//calls tangent method and then clears 
 			m.tan(op1);
-			lblText.setText(m.getCurrentValue()+ "tan() " + op1);
+			//lblText.setText(m.getCurrentValue()+ "tan() " + op1);
 			text.setText("");
 			text.requestFocus();
+			lblText.setText(m.toString());
 		}
 		
 		//sine function
@@ -303,9 +309,10 @@ public class Main extends Application
 		{
 			//calls sine method and then clears 
 			m.sin(op1);
-			lblText.setText(m.getCurrentValue()+ "sin() " + op1);
+			//lblText.setText(m.getCurrentValue()+ "sin() " + op1);
 			text.setText("");
 			text.requestFocus();
+			lblText.setText(m.toString());
 		}
 		
 		//memory plus
@@ -323,13 +330,20 @@ public class Main extends Application
 		{
 			//stores current value to memory array
 			m.memStore(op1);
+			lblText.setText("Memory stored");
+			text.setText("");
+			text.requestFocus();
 		}
 		
 		//memory recall
 		else if(e.getSource()== btnMR)
 		{
 			//prints memory array
-			m.printMemory();
+			m.getMemory();
+			lblText.setText(m.getMemory().toString());
+			text.setText("");
+			text.requestFocus();
+			
 		}
 		
 		//memory clear
@@ -337,6 +351,9 @@ public class Main extends Application
 		{
 			//clears memory array
 			m.memClear();
+			text.setText("");
+			text.requestFocus();
+			lblText.setText("Memory cleared");
 		}
 		
 		else
@@ -346,7 +363,7 @@ public class Main extends Application
 		}
 	
 		//displays the result
-		lblText.setText(m.toString());
+		//lblText.setText(m.toString());
 		
 	}
 	public static void main(String[] args) 
